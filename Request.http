@@ -1,0 +1,20 @@
+
+
+### Buscar Todos
+GET {{host}}/exemple/users
+
+### Buscar por ID
+GET {{host}}/exemple/users/4
+
+### Adicionar usuario
+POST {{host}}/exemple/users
+Content-Type: application/json
+
+{
+  "nome": "Mara Maravilha",
+  "email": "mara@vr.com.br",
+  "idade": 52
+}
+
+### Remover usuario
+DELETE {{host}}/exemple/users/5
