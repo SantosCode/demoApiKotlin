@@ -5,6 +5,7 @@ import br.com.vr.demoapikotlin.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.util.*
 
 @RestController
 @RequestMapping("exemple")
@@ -15,6 +16,8 @@ class UserResource {
     @GetMapping("/users")
     fun getUsers(): ResponseEntity<List<Usuario>> {
         val users = service.getUsers()
+//        return if (users.isEmpty()) ResponseEntity.noContent().build()
+//        else ResponseEntity.ok(users)
         return when {
             users.isEmpty() -> ResponseEntity.noContent().build()
             else -> ResponseEntity.ok(users)
