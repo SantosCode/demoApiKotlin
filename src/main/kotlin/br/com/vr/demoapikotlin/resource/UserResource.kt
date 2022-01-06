@@ -3,6 +3,7 @@ package br.com.vr.demoapikotlin.resource
 import br.com.vr.demoapikotlin.model.Usuario
 import br.com.vr.demoapikotlin.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -12,7 +13,13 @@ class UserResource {
     private lateinit var service: UserService
 
     @GetMapping("/users")
-    fun getUsers(): List<Usuario> = service.getUsers()
+    fun getUsers(): ResponseEntity<List<Usuario>> {
+        val users = service.getUsers()
+        return when {
+            users.isEmpty() -> ResponseEntity.noContent().build()
+            else -> ResponseEntity.ok(users)
+        }
+    }
 
     @GetMapping("/users/{id}")
     fun getUser(@PathVariable("id") id: Long): Usuario = service.getUser(id)
